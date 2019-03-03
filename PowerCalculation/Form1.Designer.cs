@@ -118,7 +118,7 @@
             // 
             this.btnCalculateRes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.btnCalculateRes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCalculateRes.Location = new System.Drawing.Point(479, 277);
+            this.btnCalculateRes.Location = new System.Drawing.Point(479, 284);
             this.btnCalculateRes.Name = "btnCalculateRes";
             this.btnCalculateRes.Size = new System.Drawing.Size(225, 39);
             this.btnCalculateRes.TabIndex = 1;
@@ -270,7 +270,7 @@
             // 
             this.btnCalculateCom.BackColor = System.Drawing.Color.LightSeaGreen;
             this.btnCalculateCom.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCalculateCom.Location = new System.Drawing.Point(479, 336);
+            this.btnCalculateCom.Location = new System.Drawing.Point(479, 344);
             this.btnCalculateCom.Name = "btnCalculateCom";
             this.btnCalculateCom.Size = new System.Drawing.Size(225, 39);
             this.btnCalculateCom.TabIndex = 3;
@@ -283,7 +283,7 @@
             // 
             this.btnCalculateInd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.btnCalculateInd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCalculateInd.Location = new System.Drawing.Point(479, 456);
+            this.btnCalculateInd.Location = new System.Drawing.Point(479, 451);
             this.btnCalculateInd.Name = "btnCalculateInd";
             this.btnCalculateInd.Size = new System.Drawing.Size(225, 39);
             this.btnCalculateInd.TabIndex = 6;
@@ -296,9 +296,9 @@
             // 
             this.lstCustomers.FormattingEnabled = true;
             this.lstCustomers.ItemHeight = 20;
-            this.lstCustomers.Location = new System.Drawing.Point(739, 276);
+            this.lstCustomers.Location = new System.Drawing.Point(753, 129);
             this.lstCustomers.Name = "lstCustomers";
-            this.lstCustomers.Size = new System.Drawing.Size(271, 324);
+            this.lstCustomers.Size = new System.Drawing.Size(424, 324);
             this.lstCustomers.TabIndex = 26;
             // 
             // lblCustomerName
@@ -336,7 +336,7 @@
             // lblCustTotal
             // 
             this.lblCustTotal.AutoSize = true;
-            this.lblCustTotal.Location = new System.Drawing.Point(765, 611);
+            this.lblCustTotal.Location = new System.Drawing.Point(767, 462);
             this.lblCustTotal.Name = "lblCustTotal";
             this.lblCustTotal.Size = new System.Drawing.Size(203, 20);
             this.lblCustTotal.TabIndex = 31;
@@ -345,15 +345,16 @@
             // txtSumAll
             // 
             this.txtSumAll.Enabled = false;
-            this.txtSumAll.Location = new System.Drawing.Point(903, 226);
+            this.txtSumAll.Location = new System.Drawing.Point(932, 634);
             this.txtSumAll.Name = "txtSumAll";
             this.txtSumAll.Size = new System.Drawing.Size(121, 26);
             this.txtSumAll.TabIndex = 33;
+            this.txtSumAll.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblSumAll
             // 
             this.lblSumAll.AutoSize = true;
-            this.lblSumAll.Location = new System.Drawing.Point(738, 232);
+            this.lblSumAll.Location = new System.Drawing.Point(767, 636);
             this.lblSumAll.Name = "lblSumAll";
             this.lblSumAll.Size = new System.Drawing.Size(145, 20);
             this.lblSumAll.TabIndex = 32;
@@ -362,15 +363,17 @@
             // txtSumComCharges
             // 
             this.txtSumComCharges.Enabled = false;
-            this.txtSumComCharges.Location = new System.Drawing.Point(903, 153);
+            this.txtSumComCharges.Location = new System.Drawing.Point(932, 542);
             this.txtSumComCharges.Name = "txtSumComCharges";
             this.txtSumComCharges.Size = new System.Drawing.Size(121, 26);
             this.txtSumComCharges.TabIndex = 35;
+            this.txtSumComCharges.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(738, 159);
+            this.label3.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.label3.Location = new System.Drawing.Point(767, 544);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(161, 20);
             this.label3.TabIndex = 34;
@@ -379,15 +382,17 @@
             // txtSumResCharges
             // 
             this.txtSumResCharges.Enabled = false;
-            this.txtSumResCharges.Location = new System.Drawing.Point(903, 123);
+            this.txtSumResCharges.Location = new System.Drawing.Point(932, 496);
             this.txtSumResCharges.Name = "txtSumResCharges";
             this.txtSumResCharges.Size = new System.Drawing.Size(121, 26);
             this.txtSumResCharges.TabIndex = 37;
+            this.txtSumResCharges.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(738, 129);
+            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.label4.Location = new System.Drawing.Point(767, 498);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(157, 20);
             this.label4.TabIndex = 36;
@@ -396,15 +401,17 @@
             // txtSumIndCharges
             // 
             this.txtSumIndCharges.Enabled = false;
-            this.txtSumIndCharges.Location = new System.Drawing.Point(903, 179);
+            this.txtSumIndCharges.Location = new System.Drawing.Point(932, 588);
             this.txtSumIndCharges.Name = "txtSumIndCharges";
             this.txtSumIndCharges.Size = new System.Drawing.Size(121, 26);
             this.txtSumIndCharges.TabIndex = 39;
+            this.txtSumIndCharges.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(738, 185);
+            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.label5.Location = new System.Drawing.Point(767, 590);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(151, 20);
             this.label5.TabIndex = 38;
@@ -412,7 +419,7 @@
             // 
             // btnAddCust
             // 
-            this.btnAddCust.Location = new System.Drawing.Point(1131, 21);
+            this.btnAddCust.Location = new System.Drawing.Point(1079, 32);
             this.btnAddCust.Name = "btnAddCust";
             this.btnAddCust.Size = new System.Drawing.Size(166, 47);
             this.btnAddCust.TabIndex = 40;

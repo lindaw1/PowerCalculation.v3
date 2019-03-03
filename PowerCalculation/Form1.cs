@@ -24,7 +24,8 @@ namespace PowerCalculation
         const decimal IND_PEAK_KWH_RATE = 0.065m;
         const decimal IND_OFFPEAK_FLAT_RATE = 40m;
         const decimal IND_OFFPEAK_KWH_RATE = 0.028m;
-        const string PATH = "customers.csv";  // file for storing customer data
+        const string PATH = "customers.csv";  // external file for storing customer data
+        List<Customer> customers = new List<Customer>();
 
         public frmLindaPowCal()
         {
@@ -226,7 +227,7 @@ namespace PowerCalculation
             // read all the items in the List Box lstCustomers and put them in a List<Customer>.  
             //Then we will pass this List<Customer> into the SaveCustomers Method.
 
-            //SaveCustomers(customer);
+            SaveCustomers(customers);
     
             Close(); // Exit application
         }
@@ -235,32 +236,15 @@ namespace PowerCalculation
         {
             radRes.Checked = true;
             ActiveControl = txtResPower;
+            ReadCustomers();
         }
 
-        private List<double> ReadNumbers()
-        // LINDA'S ATTEMPT - SATURDAY AFTERNOON MARCH2
-        //private List<Customer> ReadCustomers()
+        private void ReadCustomers()
         {
-            // LINDA'S ATTEMPT - SATURDAY AFTERNOON MARCH2
-            // List<Customer> customers = new List<Customer>();
-            List<double> numbers = new List<double>(); // an empty list
-
-            //// get a path
-            //DialogResult result = openFileDialog1.ShowDialog();
-            //if (result == DialogResult.OK) // user found the file
-            //{
-            //    path = openFileDialog1.FileName;
-            //}
-            //else
-            //    return numbers; // empty list
             FileStream fs = null;
             StreamReader sr = null;
             string line;
-
-            // LINDA'S ATTEMPT - SATURDAY AFTERNOON MARCH2
-            //string customer; 
-            
-            double num;
+  
             try
             {
                 // opening for reading; assuming file exists
@@ -269,22 +253,14 @@ namespace PowerCalculation
                 // do the reading
                 while (!sr.EndOfStream) // while not at the end
                 {
-                    // LINDA'S ATTEMPT - SATURDAY AFTERNOON MARCH2
-                    //line = sr.ReadLine();
-                    //customer = Convert.ToString(line); //one customer record per line
-                    //// Ask Aman, will the string have commas, Do I need to explode the
-                    //// string?
-                    //string [] customerArray = customer.Split(new Char[] {","});
-                    //c//  TODO 
-                    //// add the new customer record to the List Box lstCustomer
-
                     line = sr.ReadLine();
-                    num = Convert.ToDouble(line); // one double number per line
-                    numbers.Add(num);
+                    string [] customerArray = line.Split(',');
+                    Customer customer = new Customer(int.Parse(customerArray[1]),customerArray[0], customerArray[2], decimal.Parse(customerArray[3]));
+                    customers.Add(customer);
                 }
+                BindCustomerData();
             }
-            catch (Exception ex)  // ASK AMAN -- does this exception ensure the file
-                                  // doesn't bomb if there is no file to read?
+            catch (Exception ex)  
             {
                 MessageBox.Show("Error while reading: " + ex.Message,
                     ex.GetType().ToString());
@@ -294,8 +270,6 @@ namespace PowerCalculation
                 if (sr != null) sr.Close();
                 if (fs != null) fs.Close();
             }
-            //this line needs to be updated for PowerCalculation.
-            return numbers;
         }
         private void SaveCustomers(List<Customer> customers)
         {
@@ -336,13 +310,52 @@ namespace PowerCalculation
             //variable "customerType"
             string customerType = radRes.Checked ? "Res" : (radCom.Checked ? "Com" : ("Ind"));
 
-            Customer customer = new Customer(int.Parse(txtCustNumber.Text), txtCustName.Text,
-                customerType, decimal.Parse(txtCost.Text));  // takes data from the form and creates (instantiates) an 
-                                                             // object called "customer". (new record).
-            //add the instantianted customer to the lstCustomer list box.
+            // checks to see if the user entered valid data
+            if (Validator.IsProvided(txtCustName, "Customer Name") &&
+                Validator.IsProvided(txtCustNumber, "Customer Number") &&
+                Validator.IsNonNegativeInt(txtCustNumber, "Customer Number") &&
+                Validator.IsProvided(txtCost, "Calculate")) 
+            {
+                // takes data from the form and creates (instantiates) an 
+                // object called "customer". (new record).
+                Customer customer = new Customer(int.Parse(txtCustNumber.Text), txtCustName.Text,
+                    customerType, decimal.Parse(txtCost.Text.Replace('$', ' ')));  
+                customers.Add(customer);
+                BindCustomerData(); //writes data to list box
+            }
         }
 
+        private void BindCustomerData()
+        {
+            decimal sumResCharges = 0;
+            decimal sumComCharges = 0;
+            decimal sumIndCharges  = 0;
+            decimal sumAll = 0;
 
+            lstCustomers.Items.Clear();
+            foreach (Customer cust in customers)
+            {
+                //writes out the 4 fields for each customer record
+                lstCustomers.Items.Add(cust.CustomerName + "\t" + cust.AccountNo + "\t" + cust.ChargeAmount + "\t" + cust.CustomerType);
 
+                //checks what the customer type is, then adds the ChargeAmount to the appropriate customer total.
+                if (cust.CustomerType == "Res")
+                {
+                    sumResCharges += cust.ChargeAmount;
+                }
+                else if (cust.CustomerType == "Com")
+                {
+                    sumComCharges += cust.ChargeAmount;
+                }
+                else
+                    sumIndCharges += cust.ChargeAmount;
+            }
+            lblCustTotal.Text = "Total Number of Customers: " + customers.Count;
+            txtSumResCharges.Text = sumResCharges.ToString();
+            txtSumComCharges.Text = sumComCharges.ToString();
+            txtSumIndCharges.Text = sumIndCharges.ToString();
+            sumAll = sumResCharges + sumComCharges + sumIndCharges;
+            txtSumAll.Text = sumAll.ToString();
+        }
     }
 }
